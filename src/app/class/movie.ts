@@ -1,14 +1,14 @@
 export class Movie {
 
-    id: String;
-    name: String;
-    release: String;
-    language: String;
-    description: String;
+    id: string;
+    name: string;
+    release: string;
+    language: string;
+    description: string;
     rating: number;
 
     constructor() {
-        this.id = "ID not specified";
+        this.id = "No ID";
         this.name = "No name";
         this.release = "No release date";
         this.language = "No language";

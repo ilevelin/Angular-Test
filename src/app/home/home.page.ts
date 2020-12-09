@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Movie } from 'src/app/class/movie';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +12,23 @@ import { Movie } from 'src/app/class/movie';
 export class HomePage {
 
   movies: Movie[];
-  searchTerm: String;
-  searchboxValue: String;
+  searchTerm: string;
+  searchboxValue: string;
+  testzone: Observable<Object>;
 
-  constructor() {
+  constructor(private HttpService: HttpService) {
     this.searchTerm = "";
+    this.movies = Movie[0];
   }
 
-  StringUpdate(value: String) {
+  StringUpdate(value: string) {
     this.searchboxValue = value;
   }
 
   SearchMovies() {
     this.searchTerm = this.searchboxValue;
+    let list = this.HttpService.getMovieList(this.searchTerm);
+    this.testzone = list;
   }
 
 }
