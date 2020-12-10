@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Movie } from 'src/app/class/movie';
+import { MovieSearch } from '../interfaces/moviesearch';
+import { MovieSearchElement } from '../interfaces/moviesearchelement';
 import { HttpService } from '../services/http.service';
 
 @Component({
@@ -11,14 +11,16 @@ import { HttpService } from '../services/http.service';
 })
 export class HomePage {
 
-  movies: Movie[];
+  movies: MovieSearchElement[];
   searchTerm: string;
   searchboxValue: string;
-  testzone: Observable<Object>;
+
+  pageNumber: number;
+  resultNumber: number;
 
   constructor(private HttpService: HttpService) {
     this.searchTerm = "";
-    this.movies = Movie[0];
+    this.movies = new Array<MovieSearchElement>();
   }
 
   StringUpdate(value: string) {
@@ -26,9 +28,19 @@ export class HomePage {
   }
 
   SearchMovies() {
+    this.pageNumber = 1;
     this.searchTerm = this.searchboxValue;
-    let list = this.HttpService.getMovieList(this.searchTerm);
-    this.testzone = list;
+    this.movies.splice(0, this.movies.length);
+    this.HttpService.getMovieList(this.searchTerm).subscribe((list: MovieSearch) => {
+      this.movies = this.movies.concat(list.Search);
+      this.resultNumber = list.totalResults;
+      while (this.resultNumber >= (this.pageNumber*10)){
+        this.pageNumber = this.pageNumber + 1;
+        this.HttpService.getMovieListPage(this.searchTerm,this.pageNumber).subscribe((list: MovieSearch) => {
+          this.movies = this.movies.concat(list.Search);
+        });
+      }
+    });
   }
 
 }

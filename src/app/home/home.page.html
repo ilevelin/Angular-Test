@@ -2,9 +2,7 @@
   <ion-toolbar>
     <ion-searchbar #searchbar (ionInput)="StringUpdate(searchbar.value)"></ion-searchbar>
     <ion-buttons slot="primary">
-      <ion-button size="large" (click)="SearchMovies()">
-        Buscar
-      </ion-button>
+      <ion-button size="large" (click)="SearchMovies()"> Buscar </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -19,12 +17,12 @@
   <div>
     <div>
       <ion-item>
-        <ion-title>Resultados de la búsqueda: "{{searchTerm}}"</ion-title>
+        <ion-title>Resultados de la búsqueda: "{{searchTerm}}" (Resultados: {{resultNumber}})</ion-title>
       </ion-item>
     </div>
     <ion-list>
       <ion-item *ngFor="let movie of movies">
-        <ion-label>{{movie.name}}</ion-label>
+        <ion-label>{{movie.Title}} ({{movie.Year}})</ion-label>
       </ion-item>
       <ion-item *ngIf="movies.length === 0">
         <ion-label>No hay resultados</ion-label>
