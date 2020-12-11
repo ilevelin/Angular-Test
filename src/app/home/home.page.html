@@ -2,27 +2,25 @@
   <ion-toolbar>
     <ion-searchbar #searchbar (ionInput)="StringUpdate(searchbar.value)"></ion-searchbar>
     <ion-buttons slot="primary">
-      <ion-button size="large" (click)="SearchMovies()"> Buscar </ion-button>
+      <ion-button size="large" (click)="SearchMovies()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div>
     <div>
-      <ion-item>
+      <ion-item *ngIf="!(searchTerm.length === 0)">
         <ion-title>Resultados de la búsqueda: "{{searchTerm}}" (Resultados: {{resultNumber}})</ion-title>
       </ion-item>
     </div>
     <ion-list>
       <ion-item *ngFor="let movie of movies">
-        <ion-label>{{movie.Title}} ({{movie.Year}})</ion-label>
+        <ion-button (click)="ShowMovieDetails(movie.imdbID)">
+          <ion-label>{{movie.Title}} ({{movie.Year}})</ion-label>
+        </ion-button>
       </ion-item>
       <ion-item *ngIf="movies.length === 0">
         <ion-label>No hay resultados</ion-label>

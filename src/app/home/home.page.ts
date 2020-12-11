@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MovieSearch } from '../interfaces/moviesearch';
 import { MovieSearchElement } from '../interfaces/moviesearchelement';
 import { HttpService } from '../services/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomePage {
   pageNumber: number;
   resultNumber: number;
 
-  constructor(private HttpService: HttpService) {
+  constructor(private HttpService: HttpService, private router: Router) {
     this.searchTerm = "";
     this.movies = new Array<MovieSearchElement>();
   }
@@ -41,6 +42,11 @@ export class HomePage {
         });
       }
     });
+  }
+
+  ShowMovieDetails(id:string) {
+    this.HttpService.movietoshow = id;
+    this.router.navigate(['/moviedetails']);
   }
 
 }

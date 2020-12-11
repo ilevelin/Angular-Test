@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> {{movieDetails.Title}} </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button size="large" (click)="CloseDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-title> Fecha: </ion-title>
+        </ion-col>
+        <ion-col>
+          <ion-label> {{movieReleaseDate}} </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-title> Idioma: </ion-title>
+        </ion-col>
+        <ion-col>
+          <ion-label> {{movieDetails.Language}} </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-title> Puntuación IMDB: </ion-title>
+        </ion-col>
+        <ion-col>
+          <ion-label> {{movieDetails.imdbRating}} </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div>
+      <ion-title> Descripción </ion-title>
+      <ion-label> {{movieDetails.Plot}} </ion-label>
+    </div>
+  </div>
+</ion-content>

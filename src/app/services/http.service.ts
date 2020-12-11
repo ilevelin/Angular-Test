@@ -12,6 +12,8 @@ export class HttpService {
   apiurl: string;
   httpurl: string;
 
+  movietoshow: string;
+
   constructor(private http: HttpClient) { 
     this.apiurl = "http://www.omdbapi.com/?apikey=309580d6&";
   }
